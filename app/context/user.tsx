@@ -37,10 +37,10 @@ const UserProvider: React.FC<{children: ReactNode}> = ({ children }) => {
 
             await account.createEmailPasswordSession(email, password);
 
-            await useCreateProfile(promise?.$id, name, String(process.env.NEXT_APPWRITE_PLACEHOLDER_DEFAULT_IMAGE_ID), '')
+            await useCreateProfile(promise?.$id, name, String(process.env.NEXT_PUBLIC_PLACEHOLDER_DEFAULT_IMAGE_ID), '')
             await checkUser()
         } catch (error) {
-            
+            console.log(error);
         }
     }
 

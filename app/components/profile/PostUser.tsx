@@ -1,3 +1,4 @@
+import useCreateBucketUrl from "@/app/hooks/useCreateBucketUrl";
 import { PostUserCompTypes } from "@/app/types";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -25,7 +26,7 @@ export default function PostUser({post}: PostUserCompTypes) {
           </div>
         ) : (
           <Link href={`/post/${post.id}/${post.user_id}`}>
-            <video id={`video${post.id}`} muted loop className="aspect-[3/4] object-cover rounded-md" src={post.video_url} />
+            <video id={`video${post.id}`} muted loop className="aspect-[3/4] object-cover rounded-md" src={useCreateBucketUrl(post.video_url)} />
           </Link>
         )}
 

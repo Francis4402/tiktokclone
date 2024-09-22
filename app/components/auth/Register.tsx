@@ -2,13 +2,14 @@
 import TextInput from "../TextInput";
 import { useState } from "react";
 import { ShowErrorObject } from "@/app/types";
-
+import { useUser } from "@/app/context/user";
 import { BiLoaderCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import { useGeneralStore } from "@/app/stores/general";
 
 export default function Register() {
-    
-
+    let { setIsLoginOpen } = useGeneralStore()
+    const contextUser = useUser()
     const router = useRouter()
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -56,13 +57,25 @@ export default function Register() {
     const register = async () => {
         let isError = validate()
         if (isError) return
+        if (!contextUser) return
 
-
+        try {
+            setLoading(true)
+            await contextUser.register(name, email, password)
+            setLoading(false)
+            setIsLoginOpen(false)
+            router.refresh()
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+            alert(error)
+        }
     }
 
     return (
         <>
             <div>
+                
                 <h1 className="text-center text-[28px] mb-4 font-bold">Register</h1>
 
                 <div className="px-6 pb-2">

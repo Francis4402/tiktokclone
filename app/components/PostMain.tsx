@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ImMusic } from 'react-icons/im';
 import { AiFillHeart } from 'react-icons/ai';
 import PostMainLikes from './PostMainLikes';
+import useCreateBucketUrl from '../hooks/useCreateBucketUrl';
 
 export default function PostMain({post}: PostMainCompTypes) {
 
@@ -26,7 +27,7 @@ export default function PostMain({post}: PostMainCompTypes) {
     <>
         <div id={`PostMain-${post.id}`} className='flex border-b py-6'>
             <div className='cursor-pointer'>
-                <img className='rounded-full max-h-[60px]' width={60} src={post?.profile?.image} alt="i" />
+                <img className='rounded-full max-h-[60px]' width={60} src={useCreateBucketUrl(post?.profile?.image)} alt="i" />
             </div>
 
             <div className='pl-3 w-full px-4'>
@@ -52,7 +53,7 @@ export default function PostMain({post}: PostMainCompTypes) {
 
                 <div className='mt-2.5 flex'>
                     <div className='relative min-h-[480px] max-h-[580px] max-w-[260px] flex items-center bg-black rounded-xl cursor-pointer'>
-                        <video id={`video-${post.id}`} loop controls muted className='rounded-xl object-cover mx-auto h-full' src={post?.video_url} />
+                        <video id={`video-${post.id}`} loop controls muted className='rounded-xl object-cover mx-auto h-full' src={useCreateBucketUrl(post?.video_url)} />
 
                         <img className='absolute right-2 bottom-10' width={90} src="/images/tiktok-logo-white.png" alt="i" />
                     </div>
